@@ -1,0 +1,80 @@
+*{      
+    font-family: 'Inter', 'Segoe UI', sans-serif;      
+}      
+.order-type-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0,0,0,0.7);
+
+  z-index: 4000;
+}
+
+.modal-content {
+  position: relative;
+
+  background: #111;
+  padding: 30px;
+  border-radius: 16px;
+
+  width: 100%;
+  max-width: 500px;
+
+  text-align: center;
+
+  z-index: 5000;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #e6d2b5;
+  cursor: pointer;
+}
+
+.modal-title {
+  color: #e6d2b5;
+  margin-bottom: 10px;
+  font-family: Sacramento, cursive;
+}
+
+.modal-subtitle {
+  color: #aaa;
+  margin-bottom: 2rem;
+  font-family: Sacramento, cursive;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 12px;
+  background: #c7b8a6;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 800;
+  color:#000;
+}
+
+.order-option:hover {
+  opacity: 0.9;
+}

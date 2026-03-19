@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Artisan Grills</title>
+
+<!-- Sacramento Font -->
+
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+
+  :root {
+
+    --accent: #caa24d;
+
+    --text: #f5efe6;
+
+    --muted: #b9a89a;
+
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+
+    margin: 0;
+
+    height: 100vh;
+
+    font-family: "Sacramento", cursive;
+
+    color: var(--text);
+
+    overflow: hidden;
+
+  }
+
+  /* BACKGROUND IMAGE */
+
+  body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background: url("https://jstack-sigma.vercel.app/artisangrill/artisan4.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    filter: brightness(0.55);
+
+    z-index: -2;
+
+  }
+
+  /* DARK OVERLAY */
+
+  body::after {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.55);
+
+    z-index: -1;
+
+  }
+
+  .intro {
+
+    height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 20px;
+
+  }
+
+  /* BRAND NAME */
+
+  .brand {
+
+    font-size: 4rem;
+
+    letter-spacing: 4px;
+
+    color: var(--accent);
+      /*color:beige;*/
+      font-weight:800;
+
+    white-space: nowrap;
+
+  }
+
+  .brand span {
+
+    opacity: 0;
+
+    display: inline-block;
+
+    transform: translateY(18px);
+
+    animation: fadeUp 0.6s forwards;
+
+  }
+
+  @keyframes fadeUp {
+
+    to {
+
+      opacity: 1;
+
+      transform: translateY(0);
+
+    }
+
+  }
+
+  /* DESCRIPTION */
+
+  .description {
+
+    margin-top: 25px;
+
+    font-size: 1.4rem;
+      
+    font-weight:900;
+
+    line-height: 1.6;
+
+    min-height: 70px;
+
+    color: var(--muted);
+
+    opacity: 0;
+
+  }
+
+  /* LOADER */
+
+  .loader {
+
+    margin: 45px auto 0;
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    border: 3px solid rgba(255,255,255,0.1);
+
+    border-top-color: var(--accent);
+
+    animation: spin 1s linear infinite;
+
+    opacity: 0;
+
+  }
+
+  @keyframes spin {
+
+    to { transform: rotate(360deg); }
+
+  }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="intro">
+
+  <div>
+
+    <div class="brand" id="brand"></div>
+
+    <div class="description" id="description"></div>
+
+    <div class="loader" id="loader"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+  const brandText = "Artisan Grills";
+
+  const descriptionText =
+
+    "A refined grill house where fire, flavor, and craftsmanship come together.";
+
+  const brandEl = document.getElementById("brand");
+
+  const descEl = document.getElementById("description");
+
+  const loaderEl = document.getElementById("loader");
+
+  // LETTER FADE-IN
+
+  brandText.split("").forEach((char, i) => {
+
+    const span = document.createElement("span");
+
+    span.textContent = char === " " ? "\u00A0" : char;
+
+    span.style.animationDelay = `${i * 0.12}s`;
+
+    brandEl.appendChild(span);
+
+  });
+
+  // TYPE DESCRIPTION
+
+  function typeDescription() {
+
+    descEl.style.opacity = 1;
+
+    let i = 0;
+
+    function type() {
+
+      descEl.textContent = descriptionText.slice(0, i + 1);
+
+      i++;
+
+      if (i < descriptionText.length) {
+
+        setTimeout(type, 45);
+
+      } else {
+
+        showLoader();
+
+      }
+
+    }
+
+    type();
+
+  }
+
+  // SHOW LOADER & REDIRECT
+
+  function showLoader() {
+
+    setTimeout(() => {
+  loaderEl.style.opacity = 1;
+  setTimeout(() => {
+    window.location.href = "/artisan.html"; // ✅ FIXED
+  }, 2600);
+}, 600);
+
+  }
+
+  // Start typing after brand finishes
+
+  setTimeout(typeDescription, brandText.length * 120 + 500);
+
+</script>
+
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,113 @@
+*{      
+    font-family: 'Inter', 'Segoe UI', sans-serif;      
+}      
+/* Modal overlay */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 6000;
+}
+
+/* Modal content */
+.modal-content {
+  background: #111;
+  padding: 30px;
+  border-radius: 16px;
+  width: 350px;
+}
+
+/* Title */
+.modal-title {
+  color: #e6d2b5;
+  margin-bottom: 10px;
+  font-family: Sacramento, cursive;
+  font-size: 2rem;
+}
+/*.modal-desc {
+  color: #ddd;
+  margin-bottom: 10px;
+  text-align:left;
+}*/
+
+.labelText {
+  font-family: Sacramento, cursive;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 5px;
+  display: block;
+  text-align: left;
+  width: 100%;
+}
+
+/* Table form inputs */
+#tableOrderModal input,
+#deliveryOrderModal input,
+#pickupOrderModal input,
+#table-name,
+#table-phone,
+#table-number {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  outline: none;
+  font-size: 14px;
+}
+
+/* Button styling */
+#tableOrderModal .btn, 
+#deliveryOrderModal .btn,
+#pickupOrderModal .btn,
+.btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+/* Secondary button */
+#tableOrderModal .btn-secondary,
+#deliveryOrderModal .btn-secondary,
+#pickupOrderModal .btn-secondary,
+.btn-secondary {
+  /*background: #8b5e3c;*/
+  color: #ddd;
+ /* border: 1px solid rgba(255,255,255,0.2);*/
+  margin-top: 8px;
+}
+
+/* Main submit button */
+#tableOrderModal #tableOrderSubmit,
+#deliveryOrderModal #deliveryOrderSubmit,
+#pickupOrderModal #pickupOrderSubmit,
+#tableOrderSubmit {
+  background-color: #c7b8a6;
+  color: #000;
+}
+
+.phone-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  font-size: 14px;
+}
+
+.phone-input input {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: transparent;
+}

@@ -1,0 +1,172 @@
+/* ===== Modal Overlay ===== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2500;
+}
+
+/* ===== Modal Container ===== */
+
+.menu-modal {
+  background: #111;
+  width: 95%;
+  max-width: 900px;
+  padding: 25px;
+  border-radius: 16px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,.6);
+}
+
+/* ===== Header ===== */
+
+.menu-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #e6d2b5;
+  margin-bottom: 20px;
+}
+
+.menu-modal-header h2 {
+  font-family: Sacramento, cursive;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #e6d2b5;
+  cursor: pointer;
+}
+
+/* ===== Grid Layout ===== */
+
+.menu-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* ===== Cards ===== */
+
+.menu-modal-card {
+  background: rgba(0,0,0,.6);
+  border: 1px solid rgba(230,210,181,.1);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s ease;
+}
+
+.menu-modal-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ===== Image ===== */
+
+.menu-modal-image-wrap {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.menu-modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Tags ===== */
+
+.menu-modal-tags {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background: #e6d2b5;
+  color: #0f0c0a;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+
+/* ===== Content ===== */
+
+.menu-modal-content {
+  padding: 15px;
+  color: #ddd;
+}
+
+.menu-modal-content h3 {
+  color: #e6d2b5;
+  font-size: 18px;
+}
+
+.menu-modal-content p {
+  font-size: 14px;
+  color: #c7b8a6;
+  margin: 8px 0;
+}
+
+/* ===== Signature ===== */
+
+.signature {
+  color: #8b5e3c;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* ===== Footer ===== */
+
+.menu-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.menu-modal-footer b {
+  color: #e6d2b5;
+}
+
+/* ===== Add Button ===== */
+
+.add-order-btn {
+  background: #e6d2b5;
+  color: #0f0c0a;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.add-order-btn.added {
+  background: #8b5e3c;
+  color: #ddd;
+}
+
+/* ===== Scrollbar ===== */
+
+.menu-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu-modal::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
+}
