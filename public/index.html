@@ -204,81 +204,65 @@
 
 </div>
 
-<script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
 
   const brandText = "Artisan Grills";
-
   const descriptionText =
-
     "A refined grill house where fire, flavor, and craftsmanship come together.";
 
   const brandEl = document.getElementById("brand");
-
   const descEl = document.getElementById("description");
-
   const loaderEl = document.getElementById("loader");
 
-  // LETTER FADE-IN
+  // SAFETY CHECK (prevents blank page forever)
+  if (!brandEl || !descEl || !loaderEl) {
+    console.error("Missing DOM elements");
+    return;
+  }
 
+  // LETTER ANIMATION
   brandText.split("").forEach((char, i) => {
-
     const span = document.createElement("span");
-
     span.textContent = char === " " ? "\u00A0" : char;
-
     span.style.animationDelay = `${i * 0.12}s`;
-
     brandEl.appendChild(span);
-
   });
 
-  // TYPE DESCRIPTION
-
+  // TYPEWRITER
   function typeDescription() {
-
     descEl.style.opacity = 1;
 
     let i = 0;
-
     function type() {
-
       descEl.textContent = descriptionText.slice(0, i + 1);
-
       i++;
 
       if (i < descriptionText.length) {
-
         setTimeout(type, 45);
-
       } else {
-
         showLoader();
-
       }
-
     }
 
     type();
-
   }
 
-  // SHOW LOADER & REDIRECT
-
+  // LOADER + REDIRECT
   function showLoader() {
-
     setTimeout(() => {
-  loaderEl.style.opacity = 1;
-  setTimeout(() => {
-    window.location.href = "/artisan.html"; // ✅ FIXED
-  }, 2600);
-}, 600);
+      loaderEl.style.opacity = 1;
 
+      setTimeout(() => {
+        window.location.href = "/artisan.html";
+      }, 2600);
+
+    }, 600);
   }
-
-  // Start typing after brand finishes
 
   setTimeout(typeDescription, brandText.length * 120 + 500);
 
+});
 </script>
 
 </body>
