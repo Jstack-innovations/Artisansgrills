@@ -31,7 +31,7 @@ export default function CartSidebar({
     async function loadFees() {
       try {
         const res = await fetch(
-        `${API_BASE}/Tax`
+        `${API_BASE}/tax`
         );
 
         const data = await res.json();
