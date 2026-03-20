@@ -29,7 +29,7 @@ return;
 const initPayment = async () => {
 
 const res = await fetch(
-        `${API_BASE}/SECURE/flutterwave-key.php`
+        `${API_BASE}/flutterwave`
 );
 
 const key = await res.json();
@@ -63,7 +63,7 @@ callback: async function(data){
 if(data.status === "successful"){
 
 const res = await fetch(
-        `${API_BASE}/POST/book_table.php`,
+        `${API_BASE}/bookTable`,
 {
 method:"POST",
 headers:{
