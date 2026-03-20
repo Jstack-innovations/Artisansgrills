@@ -21,7 +21,7 @@ export default function OrderSuccess() {
 
     const fetchOrder = async () => {
       try {
-        const res = await fetch(`${API_BASE}/GET/CORS/get_order.php?order_id=${orderId}`);
+        const res = await fetch(`${API_BASE}/orders?order_id=${orderId}`);
         const data = await res.json();
         if (data.status === "success") setOrder(data.order);
         else alert("Order not found");
@@ -40,7 +40,7 @@ export default function OrderSuccess() {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const res = await fetch(`${API_BASE}/GET/CORS/MenuJson.php`);
+        const res = await fetch(`${API_BASE}/menu`);
         const data = await res.json();
         setMenu(data);
       } catch (err) {
