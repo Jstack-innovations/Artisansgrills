@@ -26,7 +26,7 @@ const fetchData = async () => {
 try{
 
 /* ⭐ Reservation Data */
-const res = await fetch(    `${API_BASE}/GET/CORS/reservation_success.php?id=${reservationId}`
+const res = await fetch(    `${API_BASE}/reservationSuccess?id=${reservationId}`
 );
 
 const data = await res.json();
@@ -41,7 +41,7 @@ setReservation(reservationData);
 
 /* ⭐ Table Data */
 const tableRes = await fetch(
-    `${API_BASE}/GET/CORS/TablesJson.php`
+    `${API_BASE}/table`
 );
 
 const tableJson = await tableRes.json();
