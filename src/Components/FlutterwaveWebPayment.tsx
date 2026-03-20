@@ -32,7 +32,7 @@ export default function FlutterwaveWebPayment({
   useEffect(() => {
     async function loadKeyAndScript() {
       try {
-        const res = await fetch(`${API_BASE}/SECURE/flutterwave-key.php`);
+        const res = await fetch(`${API_BASE}/flutterwave`);
         const data = await res.json();
 
         if (!data.publicKey) {
@@ -107,7 +107,7 @@ export default function FlutterwaveWebPayment({
           };
 
           try {
-            const res = await fetch(`${API_BASE}/POST/save_paid_order.php`, {
+            const res = await fetch(`${API_BASE}/saveOrder`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(orderPayload)
