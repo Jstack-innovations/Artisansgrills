@@ -1757,8 +1757,8 @@ box-shadow: 0 25px 50px rgba(0,0,0,0.5);
 <div class="menu-grid" id="menu-container"></div>
 
 <script type="module">
-  import { API_BASE } from '../src/Config/api.js'; // just use your existing file
-
+  export const API_BASE = "https://artisangrills-production.up.railway.app/";
+    
   fetch(`${API_BASE}/menu`)
     .then(res => res.json())
     .then(data => {
