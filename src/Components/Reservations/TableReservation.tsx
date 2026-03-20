@@ -33,7 +33,7 @@ const fetchTables = async () => {
 try {
 
 const response = await fetch(
-        `${API_BASE}/GET/CORS/TablesJson.php`
+        `${API_BASE}/table`
 );
 
 const data = await response.json();
@@ -42,7 +42,7 @@ setFloorsData(data.floors);
 
 
 const bookedRes = await fetch(
-        `${API_BASE}/GET/CORS/get-booked.php`
+        `${API_BASE}/getBooked`
 );
 
 const bookedData = await bookedRes.json();
