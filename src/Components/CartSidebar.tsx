@@ -31,7 +31,7 @@ export default function CartSidebar({
     async function loadFees() {
       try {
         const res = await fetch(
-        `${API_BASE}/GET/CORS/TaxJson.php`
+        `${API_BASE}/Tax`
         );
 
         const data = await res.json();
