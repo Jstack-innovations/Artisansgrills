@@ -1759,7 +1759,7 @@ box-shadow: 0 25px 50px rgba(0,0,0,0.5);
 <script type="module">
   import { API_BASE } from '../src/Config/api.js'; // just use your existing file
 
-  fetch(`${API_BASE}/GET/CORS/MenuJson.php`)
+  fetch(`${API_BASE}/menu`)
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById("menu-container");
