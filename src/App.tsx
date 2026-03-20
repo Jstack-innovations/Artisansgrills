@@ -16,7 +16,7 @@ import { API_BASE } from "./Config/api";
 const ApiService = {
   async getMenu() {
     const res = await fetch(
-              `${API_BASE}/GET/CORS/MenuJson.php`
+              `${API_BASE}/menu`
     );
     return await res.json();
   }
