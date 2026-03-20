@@ -1,2 +1,2 @@
 export const API_BASE =
-"http://localhost:8080/htdcs/artisangrills/api";
+"https://artisangrills-production.up.railway.app/";
