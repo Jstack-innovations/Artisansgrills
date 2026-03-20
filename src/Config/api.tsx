@@ -1,2 +1,2 @@
 export const API_BASE =
-"http://localhost:8080/htdocs/artisangrills/api";
+"http://localhost:8080/htdcs/artisangrills/api";
