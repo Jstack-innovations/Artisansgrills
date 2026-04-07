@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import { API_BASE } from "../Config/api";
 
@@ -11,6 +11,8 @@ export default function OrderSuccess() {
   const [menu, setMenu] = useState<any>({});
   const [loading, setLoading] = useState(true);
   const [showTrackModal, setShowTrackModal] = useState(false);
+
+  const navigate = useNavigate(); // ✅ get navigate function
 
   // Fetch order
   useEffect(() => {
