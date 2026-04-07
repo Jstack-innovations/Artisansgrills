@@ -143,6 +143,16 @@ export default function OrderSuccess() {
             Track Order
           </button>
         )}
+
+
+                {/* Back To Menu Button */}
+        <button
+          style={{ marginTop: 20, padding: 15, borderRadius: 12, backgroundColor: "orangered", fontWeight: "bold", width: "100%" }}
+          >
+          Back To Menu
+        </button>
+
+        
       </div>
 
       {/* ⭐ Custom Modal */}
