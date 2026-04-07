@@ -252,6 +252,20 @@ fontWeight:"bold"
 Print Receipt
 </button>
 
+    <button
+  style={{
+    marginTop: 20,
+    padding: 15,
+    borderRadius: 12,
+    backgroundColor: "orangered",
+    fontWeight: "bold",
+    width: "100%"
+  }}
+  onClick={() => navigate("/", { replace: true })}
+>
+  Back To Menu
+</button>
+
 </div>
 
 </div>
