@@ -147,10 +147,18 @@ export default function OrderSuccess() {
 
                 {/* Back To Menu Button */}
         <button
-          style={{ marginTop: 20, padding: 15, borderRadius: 12, backgroundColor: "orangered", fontWeight: "bold", width: "100%" }}
-          >
-          Back To Menu
-        </button>
+  style={{
+    marginTop: 20,
+    padding: 15,
+    borderRadius: 12,
+    backgroundColor: "peru",
+    fontWeight: "bold",
+    width: "100%"
+  }}
+  onClick={() => navigate("/", { replace: true })}
+>
+  Back To Menu
+</button>
 
         
       </div>
