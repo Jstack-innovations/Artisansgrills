@@ -346,6 +346,21 @@
     color: var(--beige);
 }
 
+.stock-info {
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.in-stock {
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+.out-stock {
+  color: #ff4d4f;
+  font-weight: 600;
+}
+
 /* Button */
 .add-order-btn {
     background: var(--beige);
