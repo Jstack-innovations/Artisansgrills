@@ -227,11 +227,20 @@ function MenuGrid({ menuData, activeFilter, addToCart, setModalCategory }) {
               <div className="menu-items">
 
                 {menuData[cat]?.slice(0, 2).map(item => (
-                  <div key={item.id} className="menu-card">
+                  <div
+  key={item.id}
+  className={`menu-card ${item.stock === 0 ? "sold-out" : ""}`}
+>
 
                     {/* Image */}
                     <div className="menu-image-wrapper">
                       <img src={item.image} className="menu-image" />
+
+                      {item.stock === 0 && (
+  <div className="sold-overlay">
+    OUT OF STOCK
+  </div>
+)}
 
                       {/* Tags */}
                       {item.tags && (
