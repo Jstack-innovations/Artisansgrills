@@ -44,7 +44,10 @@ export default function MenuModal({
         <div className="menu-modal-grid">
 
           {items.map((item:any) => (
-            <div key={item.id} className="menu-modal-card">
+            <div
+  key={item.id}
+  className={`menu-modal-card ${item.stock === 0 ? "sold-out" : ""}`}
+>
 
               <div className="menu-modal-image-wrap">
                 <img
@@ -52,6 +55,12 @@ export default function MenuModal({
                   className="menu-modal-image"
                   onClick={() => setPreviewItem?.(item)}
                 />
+
+          {item.stock === 0 && (
+  <div className="sold-overlay">
+    OUT OF STOCK
+  </div>
+)}
 
                 {item.tags && (
                   <div className="menu-modal-tags">
@@ -79,22 +88,35 @@ export default function MenuModal({
 
                 <div className="menu-modal-footer">
 
-                  <b>${item.price}</b>
+  <b>${item.price}</b>
 
-                  <button
-                    className={`add-order-btn ${
-                      addedItems.includes(item.id) ? "added" : ""
-                    }`}
-                    onClick={() => handleAdd(item)}
-                  >
-                    {addedItems.includes(item.id)
-                      ? "✓ ORDER ADDED"
-                      : "ADD ORDER"
-                    }
-                  </button>
+  <div className="stock-info">
+    {item.stock > 0 ? (
+      <span className="in-stock">
+        Plates Available: {item.stock}
+      </span>
+    ) : (
+      <span className="out-stock">
+        Out of Stock
+      </span>
+    )}
+  </div>
 
-                </div>
+  <button
+    className={`add-order-btn ${
+      addedItems.includes(item.id) ? "added" : ""
+    }`}
+    disabled={item.stock === 0}
+    onClick={() => handleAdd(item)}
+  >
+    {item.stock === 0
+      ? "OUT OF STOCK"
+      : addedItems.includes(item.id)
+      ? "✓ ORDER ADDED"
+      : "ADD ORDER"}
+  </button>
 
+</div>
               </div>
 
             </div>
