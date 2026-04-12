@@ -263,41 +263,49 @@ function MenuGrid({ menuData, activeFilter, addToCart, setModalCategory }) {
                           ✨ {item.signature}
                         </div>
                       )}
+<div className="menu-footer">
 
-                      <div className="menu-footer">
+  <b className="menu-price">
+    ${item.price}
+  </b>
 
-                        <b className="menu-price">
-                          ${item.price}
-                        </b>
+  <div className="stock-info">
+    {item.stock > 0 ? (
+      <span className="in-stock">
+        Plates Available: {item.stock}
+      </span>
+    ) : (
+      <span className="out-stock">
+        Out of Stock
+      </span>
+    )}
+  </div>
 
-                       <button
-  className={`add-order-btn ${
-    addedItems.includes(item.id) ? "added" : ""
-  }`}
-  onClick={() => {
+  <button
+    className={`add-order-btn ${
+      addedItems.includes(item.id) ? "added" : ""
+    }`}
+    disabled={item.stock === 0}
+    onClick={() => {
+      addToCart(item);
 
-    addToCart(item);
+      setAddedItems(prev => [...prev, item.id]);
 
-    // Show added state
-    setAddedItems(prev => [...prev, item.id]);
+      setTimeout(() => {
+        setAddedItems(prev =>
+          prev.filter(id => id !== item.id)
+        );
+      }, 2500);
+    }}
+  >
+    {item.stock === 0
+      ? "OUT OF STOCK"
+      : addedItems.includes(item.id)
+      ? "✓ ORDER ADDED"
+      : "ADD ORDER"}
+  </button>
 
-    // Remove after 2.5 seconds
-    setTimeout(() => {
-      setAddedItems(prev =>
-        prev.filter(id => id !== item.id)
-      );
-    }, 2500);
-
-  }}
->
-  {addedItems.includes(item.id)
-    ? "✓ ORDER ADDED"
-    : "ADD ORDER"
-  }
-</button>
-
-                      </div>
-
+</div>
                     </div>
                   </div>
                 ))}
