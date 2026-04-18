@@ -90,7 +90,7 @@ export default function OrderSuccess() {
           <p><b>Order Type:</b> {order.order_type}</p>
           {order.order_type === "delivery" && <p><b>Address:</b> {order.full_address}</p>}
           {order.order_type === "pickup" && order.pickup_time && <p><b>Pickup Time:</b> {order.pickup_time}</p>}
-<p><b>Total:</b> USD{order.total_amount}</p>
+<p><b>Total:</b> ₦{order.total_amount}</p>
 </div>
 
 <h2 style={{ textAlign: "center", marginTop: 20 }}>Order Items</h2>
