@@ -78,7 +78,7 @@ export default function FlutterwaveWebPayment({
       public_key: key,
       tx_ref: "ARTISAN_" + Date.now(),
       amount: safeAmount,
-      currency: "NGN",
+      currency: "USD",
       payment_options: "card,banktransfer,ussd",
       customer: {
         email: "customer@artisan.com",
