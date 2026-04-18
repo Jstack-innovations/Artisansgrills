@@ -191,7 +191,7 @@ AVAILABLE
 
 <p className="price">
 
-Reservation Fee: ₦{table.amount.toLocaleString()}
+Reservation Fee: ${table.amount.toLocaleString()}
 
 </p>
 
@@ -245,7 +245,7 @@ Booking Table {selectedTable?.number}
 </span>
 
 <span className="modalPrice">
-For ₦{selectedTable?.amount?.toLocaleString()}
+For ${selectedTable?.amount?.toLocaleString()}
 </span>
 
 </div>
