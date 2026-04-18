@@ -201,7 +201,7 @@ Table {table.number}
 </h2>
 
 <p>Seats: {table.seats}</p>
-<p>Price: ₦{table.amount}</p>
+<p>Price: ${table.amount}</p>
 <p>{table.description}</p>
 
 </div>
@@ -218,7 +218,7 @@ borderRadius:15
 
 <p>Reservation Code: {reservation.reservation_code}</p>
 <p>Transaction ID: {reservation.transaction_id}</p>
-<p>Amount: ₦{reservation.amount}</p>
+<p>Amount: ${reservation.amount}</p>
 <p>Booking Date: {reservation.bookingDate}</p>
 
 </div>
