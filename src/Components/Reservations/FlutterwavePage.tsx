@@ -50,7 +50,7 @@ tx_ref: "TABLE_" + Date.now(),
 
 amount: Number(booking.amount),
 
-currency: "NGN",
+currency: "USD",
 
 customer:{
 email: booking.email,
