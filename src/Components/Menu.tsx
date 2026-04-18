@@ -267,7 +267,7 @@ function MenuGrid({ menuData, activeFilter, addToCart, setModalCategory }) {
                       <div className="menu-footer">
 
                         <b className="menu-price">
-                          ₦{item.price}
+                          ${item.price}
                         </b>
 
                        <button
