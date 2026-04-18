@@ -133,7 +133,7 @@ export default function CartSidebar({
 
                 <div className="cart-price-row">
                   <span className="cart-price">
-                    ${(item.price * (item.quantity || 1)).toFixed(2)}
+                    ₦{(item.price * (item.quantity || 1)).toFixed(2)}
                   </span>
 
                   <button
@@ -178,27 +178,27 @@ export default function CartSidebar({
 
     <div className="cart-total-row">
       <span>Subtotal</span>
-      <span>${subtotal.toFixed(2)}</span>
+      <span>₦{subtotal.toFixed(2)}</span>
     </div>
 
     <div className="cart-total-row">
       <span>Tax</span>
-      <span>${taxValue.toFixed(2)}</span>
+      <span>₦{taxValue.toFixed(2)}</span>
     </div>
 
     <div className="cart-total-row">
       <span>Service Fee</span>
-      <span>${serviceValue.toFixed(2)}</span>
+      <span>₦{serviceValue.toFixed(2)}</span>
     </div>
 
     <div className="cart-total-row">
       <span>Delivery Fee</span>
-      <span>${deliveryValue.toFixed(2)}</span>
+      <span>₦{deliveryValue.toFixed(2)}</span>
     </div>
 
     <div className="cart-total-final">
       <span>Total</span>
-      <span>${finalTotal.toFixed(2)}</span>
+      <span>₦{finalTotal.toFixed(2)}</span>
     </div>
 
     <button
