@@ -88,7 +88,7 @@ export default function MenuModal({
 
                 <div className="menu-modal-footer">
 
-  <b>${item.price}</b>
+  <b>₦{item.price}</b>
 
   <div className="stock-info">
     {item.stock > 0 ? (
