@@ -52,7 +52,39 @@ export default function OrderSuccess() {
     fetchMenu();
   }, []);
 
-  if (loading) return <div style={{ textAlign: "center", marginTop: 50 }}>Loading...</div>;
+  if (loading)
+  return (
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#0f0c0a"
+      }}
+    >
+      <style>
+        {`
+          .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.15);
+            border-top: 4px solid #e6d2b5;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+          }
+
+          @keyframes spin {
+            to {
+              transform: rotate(360deg);
+            }
+          }
+        `}
+      </style>
+
+      <div className="spinner" />
+    </div>
+  );
   if (!order) return null;
 
   const getImage = (menu: any, menuId: number) => {

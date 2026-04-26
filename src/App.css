@@ -553,6 +553,66 @@
 }
 
 
+.floating-guest-order {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  width: 65px;
+  height: 65px;
+
+ /* background: #000;          /* Black */
+ /* color: var(--beige);*/
+ color: #000;          /* Black */
+  background: var(--text-muted);
+
+  border: none;
+  border-radius: 50%;        /* Fully rounded */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: .3s ease;
+
+  z-index: 1002;
+
+  position: fixed;
+}
+
+.floating-guest-order:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.floating-guest-order svg {
+  font-size: 26px;   /* Bigger cart icon */
+}
+
+.floating-guest-order .cart-count {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+ /* background: var(--success);
+  color: var(--beige);*/
+  background: #000;
+  color: orangered;
+
+  min-width: 20px;
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  border-radius: 50%;
+}
+
+
 /* ================= Footer ================= */
 .footer {
   background: #0f0c0a; /* Dark background to match app */

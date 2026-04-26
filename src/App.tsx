@@ -478,8 +478,7 @@ export default function MenuApp() {
       
       
       
-      
-      {showAd && (
+  {showAd ? (
   <div className="ad-banner ad-slide">
     <div className="ad-content">
 
@@ -498,10 +497,7 @@ export default function MenuApp() {
 
       <div className="ad-text">
         <h3>Premium Dining Experience</h3>
-        <p>
-          Discover the best dishes in town — fresh, modern,
-          delicious.
-        </p>
+        <p>Discover the best dishes in town — fresh, modern, delicious.</p>
 
         <a href="#menu" className="ad-btn">
           View Menu
@@ -517,6 +513,14 @@ export default function MenuApp() {
 
     </div>
   </div>
+) : (
+  <button
+    className="floating-guest-order"
+    onClick={() => setCartOpen(true)}
+  >
+    <FontAwesomeIcon icon={faShoppingCart} />
+    <span className="cart-count">{cart.length}</span>
+  </button>
 )}
 
 

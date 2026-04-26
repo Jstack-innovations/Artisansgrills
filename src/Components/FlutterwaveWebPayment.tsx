@@ -118,7 +118,7 @@ export default function FlutterwaveWebPayment({
             if (result.status === "success") {
               // ✅ Navigate immediately to OrderSuccess page
               // FlutterwaveWebPayment
-navigate(`/order-success?order_id=${result.order_id}`, { replace: true });
+window.location.href = `/order-success?order_id=${result.order_id}`;
             } else {
               alert(result.message || "Database save failed");
             }
@@ -133,9 +133,9 @@ navigate(`/order-success?order_id=${result.order_id}`, { replace: true });
         }
       },
       onclose: function () {
-        paymentStarted.current = false;
-        onClose?.();
-      }
+  paymentStarted.current = false;
+  window.location.href = "/";
+}
     });
   }
 
