@@ -59,7 +59,7 @@ export default function FlutterwaveWebPayment({
     loadKeyAndScript();
   }, []);
 
-  function startPayment(key: string) {
+  async function startPayment(key: string) {
     if (paymentStarted.current) return;
     paymentStarted.current = true;
 
@@ -73,6 +73,45 @@ export default function FlutterwaveWebPayment({
       alert("Payment gateway failed to load");
       return;
     }
+
+    /* ===== STEP 1: CREATE ORDER BEFORE FLUTTERWAVE OPENS ===== */
+
+    let order_id: number | null = null;
+
+    try {
+      const createRes = await fetch(`${API_BASE}/createOrder`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || "Customer",
+          phone: phone || "",
+          table_no: tableNo || "",
+          address,
+          order_type: orderType || "table",
+          pickup_time: pickupTime,
+          amount: safeAmount,
+          cart
+        })
+      });
+
+      const createData = await createRes.json();
+
+      if (createData.status !== "success") {
+        alert("Could not initialize order");
+        paymentStarted.current = false;
+        return;
+      }
+
+      order_id = createData.order_id;
+
+    } catch (err) {
+      console.error(err);
+      alert("Could not initialize order");
+      paymentStarted.current = false;
+      return;
+    }
+
+    /* ===== STEP 2: OPEN FLUTTERWAVE ===== */
 
     window.FlutterwaveCheckout({
       public_key: key,
@@ -94,23 +133,20 @@ export default function FlutterwaveWebPayment({
 
         if (data.status === "successful") {
 
-          const orderPayload = {
-            name: name || "Customer",
-            phone: phone || "",
-            table_no: tableNo || "",
-            address,
-            order_type: orderType || "table",
-            pickup_time: pickupTime,
-            amount: safeAmount,
-            transaction_id: data.transaction_id || data.tx_ref,
-            cart
-          };
+          /* ===== STEP 3: CONFIRM ORDER AFTER PAYMENT ===== */
 
           try {
-            const res = await fetch(`${API_BASE}/saveOrder`, {
+            const res = await fetch(`${API_BASE}/confirmOrder`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(orderPayload)
+              body: JSON.stringify({
+                order_id,
+                transaction_id: data.transaction_id || data.tx_ref,
+                amount: safeAmount,
+                order_type: orderType || "table",
+                table_no: tableNo || "",
+                cart
+              })
             });
 
             const result = await res.json();
@@ -118,7 +154,7 @@ export default function FlutterwaveWebPayment({
             if (result.status === "success") {
               // ✅ Navigate immediately to OrderSuccess page
               // FlutterwaveWebPayment
-window.location.href = `/order-success?order_id=${result.order_id}`;
+              window.location.href = `/order-success?order_id=${result.order_id}`;
             } else {
               alert(result.message || "Database save failed");
             }
@@ -133,9 +169,9 @@ window.location.href = `/order-success?order_id=${result.order_id}`;
         }
       },
       onclose: function () {
-  paymentStarted.current = false;
-  window.location.href = "/";
-}
+        paymentStarted.current = false;
+        window.location.href = "/";
+      }
     });
   }
 

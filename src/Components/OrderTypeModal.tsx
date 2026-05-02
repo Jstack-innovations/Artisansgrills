@@ -17,28 +17,18 @@ export default function OrderTypeModal({
   amount
 }) {
 
+  const [showTableChoice, setShowTableChoice] = useState(false);
   const [showTableModal, setShowTableModal] = useState(false);
   const [showPickupModal, setShowPickupModal] = useState(false);
   const [showDeliveryModal, setShowDeliveryModal] = useState(false);
 
   if (!open) return null;
 
-  function handleType(type) {
-  if (type === "table") {
-    setShowTableModal(true);
-    return;
+  function handlePayLater() {
+    localStorage.setItem("tab_pending_cart",   JSON.stringify(cart));
+    localStorage.setItem("tab_pending_amount", JSON.stringify(amount));
+    window.location.href = "/pay-later";
   }
-
-  if (type === "pickup") {
-    setShowPickupModal(true);
-    return;
-  }
-
-  if (type === "delivery") {
-    setShowDeliveryModal(true);
-    return;
-  }
-}
 
   return (
     <>
@@ -47,12 +37,10 @@ export default function OrderTypeModal({
         
         <div className="modal-overlay" onClick={onClose}></div>
 
-
         <div
           className="modal-content"
           onClick={(e) => e.stopPropagation()}
         >
-          
 
           <button
             className="modal-close"
@@ -61,45 +49,85 @@ export default function OrderTypeModal({
             &times;
           </button>
 
-          <h2 className="modal-title">
-            How would you like to order?
-          </h2>
+          {/* ===== STEP 1: ORDER TYPE ===== */}
+          {showTableChoice === false && (
+            <>
+              <h2 className="modal-title">
+                How would you like to order?
+              </h2>
 
-          <p className="modal-subtitle">
-            Your satisfaction is our competence
-          </p>
+              <p className="modal-subtitle">
+                Your satisfaction is our competence
+              </p>
 
-          <div className="modal-grid">
+              <div className="modal-grid">
 
-            <button
-              className="checkout-btn order-option"
-              onClick={() => handleType("table")}
-            >
-              ️<FontAwesomeIcon icon={faUtensils} />
-              TABLE ORDER
-            </button>
+                <button
+                  className="checkout-btn order-option"
+                  onClick={() => setShowTableChoice(true)}
+                >
+                  ️<FontAwesomeIcon icon={faUtensils} />
+                  TABLE ORDER
+                </button>
 
-            <button
-              className="checkout-btn order-option"
-              onClick={() => handleType("delivery")}
-            >
-              <FontAwesomeIcon icon={faTruck} />
-              DELIVERY ORDER
-            </button>
+                <button
+                  className="checkout-btn order-option"
+                  onClick={() => setShowDeliveryModal(true)}
+                >
+                  <FontAwesomeIcon icon={faTruck} />
+                  DELIVERY ORDER
+                </button>
 
-            <button
-              className="checkout-btn order-option"
-              onClick={() => handleType("pickup")}
-            >
-              ️<FontAwesomeIcon icon={faBagShopping} />
-              PICKUP ORDER
-            </button>
+                <button
+                  className="checkout-btn order-option"
+                  onClick={() => setShowPickupModal(true)}
+                >
+                  ️<FontAwesomeIcon icon={faBagShopping} />
+                  PICKUP ORDER
+                </button>
 
-          </div>
+              </div>
+            </>
+          )}
+
+          {/* ===== STEP 2: PAY NOW OR PAY LATER ===== */}
+          {showTableChoice === true && (
+            <>
+              <h2 className="modal-title">
+                Table Order
+              </h2>
+
+              <p className="modal-subtitle">
+                How would you like to pay?
+              </p>
+
+              <div className="modal-grid">
+
+                <button
+                  className="checkout-btn order-option"
+                  onClick={() => {
+                    setShowTableChoice(false);
+                    setShowTableModal(true);
+                  }}
+                >
+                  PAY NOW
+                </button>
+
+                <button
+                  className="checkout-btn order-option"
+                  onClick={handlePayLater}
+                >
+                  PAY LATER
+                </button>
+
+              </div>
+            </>
+          )}
+
         </div>
       </div>
 
-      {/* ⭐ Table */}
+      {/* ⭐ Table — Pay Now flow */}
       <TableOrderModal
         open={showTableModal}
         cart={cart}

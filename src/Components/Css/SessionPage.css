@@ -1,0 +1,266 @@
+/* SessionPage.css */
+
+
+.sp-page {
+  min-height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 6rem;
+  background: #fafafa !important;
+  color: #1a1a1a !important;
+  font-family: inherit;
+}
+
+/* ===== HEADER ===== */
+
+.sp-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.sp-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(250, 250, 250, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.sp-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.4rem;
+}
+
+.sp-code {
+  display: inline-block;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.sp-meta {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ===== ITEMS ===== */
+
+.sp-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.sp-empty {
+  text-align: center;
+  color: #aaa;
+  padding: 2rem 0;
+  font-size: 0.95rem;
+}
+
+.sp-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: #fff;
+  border-radius: 12px;
+  padding: 0.8rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.sp-item-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sp-item-info {
+  flex: 1;
+}
+
+.sp-item-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.2rem;
+}
+
+.sp-item-qty {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.sp-item-price {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  flex-shrink: 0;
+}
+
+/* ===== TOTAL ===== */
+
+.sp-total-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.sp-total-amount {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* ===== ACTIONS ===== */
+
+.sp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.sp-btn {
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 10px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sp-btn--add {
+  background: #fff;
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
+}
+
+.sp-btn--add:hover {
+  background: #f5f5f5;
+}
+
+.sp-btn--pay {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.sp-btn--pay:hover {
+  background: #333;
+}
+
+.sp-btn--pay:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===== LOADING / ERROR ===== */
+
+.sp-center {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: #fafafa !important;
+  color: #1a1a1a !important;
+}
+
+.sp-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #eee;
+  border-top-color: #1a1a1a;
+  border-radius: 50%;
+  animation: sp-spin 0.7s linear infinite;
+}
+
+@keyframes sp-spin {
+  to { transform: rotate(360deg); }
+}
+
+.sp-error {
+  color: #c0392b;
+  font-weight: 600;
+}
+
+
+
+/* MODAL WRAPPER */
+/* ===== CLOSED SESSION FULL SCREEN ===== */
+
+.sp-modal-wrapper {
+  min-height: 100vh;
+  background: #000; /* FULL PAGE BLACK */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  text-align: center;
+}
+
+/* MODAL BOX */
+.sp-modal {
+  background: #2a2a2a; /* GREY MODAL */
+  padding: 32px 24px;
+  border-radius: 16px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.sp-modal h2 {
+  color: #ffffff;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+}
+
+.sp-modal p {
+  color: #cfcfcf;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* STICKY BOTTOM BUTTON */
+.sp-return-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 18px;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: #d8d2c4; /* GREYISH BEIGE */
+  color: #000;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sp-return-btn:active {
+  opacity: 0.9;
+}

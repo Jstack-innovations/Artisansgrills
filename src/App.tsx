@@ -8,6 +8,8 @@ import { faShoppingCart, faUtensils, faBurger,
   import { faInstagram, faFacebookF, faTwitter, faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import CartSidebar from "./Components/CartSidebar";
 import MenuModal from "./Components/MenuModal";
+import { getSession, clearSession } from "./Utils/session";
+import { checkSession } from "./Utils/sessionApi";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from "./Config/api";
 
@@ -21,6 +23,32 @@ const ApiService = {
     return await res.json();
   }
 };
+
+async function addToSessionAPI(sessionCode, item) {
+  try {
+    const res = await fetch(`${API_BASE}/addToSession`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        session_code: sessionCode,
+        cart: [
+          {
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: 1
+          }
+        ]
+      })
+    });
+
+    return await res.json();
+  } catch (err) {
+    return null;
+  }
+}
 
 /* ================= Typing ================= */
 
@@ -84,7 +112,7 @@ function useTyping(text = "") {
 
 /* ================= Header ================= */
 
-function Header({ cart, setCartOpen }) {
+function Header({ cart, setCartOpen, handleFloatingClick }) {
 
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate(); // ⭐ Add this
@@ -111,11 +139,13 @@ function Header({ cart, setCartOpen }) {
 
           <button
             className="cart-btn"
-            onClick={() => setCartOpen(true)}
+            onClick={handleFloatingClick}
           >
             <FontAwesomeIcon icon={faShoppingCart} />
             GUEST's ORDER
-            <span className="cart-count">{cart.length}</span>
+            <span className="cart-count">
+              {cart.reduce((sum, i) => sum + i.quantity, 0)}
+            </span>
           </button>
 
           {/* ⭐ Replace window.location */}
@@ -344,6 +374,8 @@ function MenuGrid({ menuData, activeFilter, addToCart, setModalCategory }) {
 /* ================= MAIN APP ================= */
 
 export default function MenuApp() {
+  
+  const navigate = useNavigate();
 
   const [menuData, setMenuData] = useState({});
   const [cart, setCart] = useState([]);
@@ -377,6 +409,58 @@ export default function MenuApp() {
 }, []);
 
 
+useEffect(() => {
+  async function syncCart() {
+    const code = getSession();
+
+    if (!code) {
+      return;
+    }
+
+    const data = await checkSession(code);
+
+    if (data?.status === "success") {
+      setCart(data.items || []);
+    }
+  }
+
+  syncCart();
+}, [cartOpen]); // refresh whenever cart opens
+
+
+
+async function handleFloatingClick() {
+  const code = getSession();
+
+  // 1. No session → normal cart flow
+  if (!code) {
+    setCartOpen(true);
+    return;
+  }
+
+  // 2. Check backend status
+  const data = await checkSession(code);
+
+  if (!data || data.status !== "success") {
+    clearSession();
+    setCartOpen(true);
+    return;
+  }
+
+  const status = data.order?.status;
+
+  // 3. Active tab → go to session page
+  if (status === "open") {
+    navigate(`/session?code=${code}`);
+    return;
+  }
+
+  // 4. Paid/closed → reset + normal flow
+  clearSession();
+  setCartOpen(true);
+}
+
+
 
 
   const typingText = useTyping(
@@ -384,21 +468,38 @@ export default function MenuApp() {
   );
 
   /* ⭐ CART LOGIC */
-  function addToCart(item) {
-    setCart(prev => {
-      const found = prev.find(i => i.id === item.id);
+async function addToCart(item) {
+  const sessionCode = getSession();
 
-      if (found) {
-        return prev.map(i =>
-          i.id === item.id
-            ? { ...i, quantity: (i.quantity || 1) + 1 }
-            : i
-        );
-      }
+  // 1. ALWAYS update UI first (LOCAL TRUTH)
+  setCart(prev => {
+    const found = prev.find(i => i.id === item.id);
 
-      return [...prev, { ...item, quantity: 1 }];
-    });
+    if (found) {
+      return prev.map(i =>
+        i.id === item.id
+          ? { ...i, quantity: i.quantity + 1 }
+          : i
+      );
+    }
+
+    return [...prev, { ...item, quantity: 1 }];
+  });
+
+  // 2. If session exists → sync only (NO STATE CHANGE)
+  if (sessionCode) {
+    const data = await checkSession(sessionCode);
+
+    if (!data || data.status !== "success") {
+      clearSession();
+      return;
+    }
+
+    if (data.order?.status === "open") {
+      addToSessionAPI(sessionCode, item);
+    }
   }
+}
 
   /* ⭐ QUANTITY UPDATE */
   function updateQty(id, value) {
@@ -427,7 +528,11 @@ export default function MenuApp() {
   return (
     <div style={{ background: "#0f0c0a", minHeight: "100vh" }}>
 
-<Header cart={cart} setCartOpen={setCartOpen} />
+      <Header
+  cart={cart}
+  setCartOpen={setCartOpen}
+  handleFloatingClick={handleFloatingClick}
+/>
 
       <Hero typingText={typingText} />
 
@@ -515,12 +620,14 @@ export default function MenuApp() {
   </div>
 ) : (
   <button
-    className="floating-guest-order"
-    onClick={() => setCartOpen(true)}
-  >
-    <FontAwesomeIcon icon={faShoppingCart} />
-    <span className="cart-count">{cart.length}</span>
-  </button>
+  className="floating-guest-order"
+  onClick={handleFloatingClick}
+>
+  <FontAwesomeIcon icon={faShoppingCart} />
+<span className="cart-count">
+{cart.reduce((sum, i) => sum + i.quantity, 0)}
+</span>
+</button>
 )}
 
 

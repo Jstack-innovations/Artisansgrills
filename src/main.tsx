@@ -9,6 +9,8 @@ import App from './App.tsx'
 import TableReservation from "./Components/Reservations/TableReservation.jsx"
 import FlutterwavePage from "./Components/Reservations/FlutterwavePage.jsx"
 import ReservationSuccess from "./Components/Reservations/ReservationSuccess.jsx"
+import PayLater from "./Components/PayLater.tsx"
+import SessionPage from "./Components/SessionPage.tsx"
 import OrderSuccess from "./Components/OrderSuccess.jsx"
 
 
@@ -27,6 +29,8 @@ if (root) {
           <Route path="/reservations" element={<TableReservation />} />
           <Route path="/flutterwave" element={<FlutterwavePage />} />
           <Route path="/reservation-success" element={<ReservationSuccess />} />
+           <Route path="/pay-later" element={<PayLater />} />
+           <Route path="/session"   element={<SessionPage />} />
           <Route path="/order-success" element={<OrderSuccess />} />
                   </Routes>
       </BrowserRouter>
